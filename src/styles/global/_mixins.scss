@@ -1,0 +1,7 @@
+@mixin plain-link($color: $primary) {
+  &,
+  &:hover {
+    text-decoration: none;
+    color: $color;
+  }
+}
