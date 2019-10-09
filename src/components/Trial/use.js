@@ -151,6 +151,15 @@ const TestComp = ({ children }) => {
     console.log('useEffect::', step, values, step.currStep);
   }, [step, values]);
 
+
+  const updateFormsOnStep = (action) => {
+    console.log('running update')
+      let formVal = FormRef.current[0]
+      updateInput(formVal.value)
+      updateFormInputValue(null, formVal)
+  }
+
+
   const handleStep = (action, callback) => {
     if (
       action === 'prev' &&
@@ -165,9 +174,7 @@ const TestComp = ({ children }) => {
     if (action === 'next' && step.currStep !== step.total - 1) {
       console.log('next:: Stepper:: handleStep:: from::', step);
       if (callback) {
-        let formVal = FormRef.current[0];
-        updateInput(formVal.value);
-        updateFormInputValue(null, formVal);
+        callback();
       }
       reset();
       return setStep({ ...step, currStep: step.currStep + 1 });
@@ -176,13 +183,14 @@ const TestComp = ({ children }) => {
     if (action === 'submit') {
       console.log('submit:: Stepper:: handleStep:: from::', step);
       setStep({ ...step, currStep: step.currStep + 1 });
-      return callback ? () => callback() : null;
+      if (callback) {
+        callback();
+      }
+      reset();
+      return  setStep({ ...step, currStep: step.currStep + 1 });
     }
     if (action === 'submit') {
-      reset();
-      let formVal = FormRef.current[0];
-      updateInput(formVal.value);
-      updateFormInputValue(null, formVal);
+
       return setStep({ ...step, currStep: 0 });
     }
 
@@ -250,7 +258,7 @@ const TestComp = ({ children }) => {
         <>
           {step.currStep !== step.total - 1 &&
             (step.currStep !== step.total && (
-              <button type="button" onClick={() => handleStep('next', true)}>
+              <button type="button" onClick={() => handleStep('next', updateFormsOnStep)}>
                 next
               </button>
             ))}
@@ -264,7 +272,7 @@ const TestComp = ({ children }) => {
       <>
         {step.currStep !== step.total &&
           (step.currStep === step.total - 1 && (
-            <button type="button" onClick={() => handleStep('submit')}>
+            <button type="button" onClick={() => handleStep('submit', updateFormsOnStep)}>
               submit
             </button>
           ))}
@@ -280,7 +288,7 @@ const TestComp = ({ children }) => {
         onSubmit={updateFormInputValue}
         onKeyUp={keyupFormInputValue}
       >
-        {setupStepInput(views, step.currStep, true)}
+        {setupStepInput(views, step.currStep, updateFormsOnStep)}
         {children}
       </form>
       {renderNext()}
