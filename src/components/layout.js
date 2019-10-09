@@ -1,9 +1,9 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
-import Header from "./Layout/Header/Header";
-import Footer from "./Layout/Footer/Footer";
-import Navbar from "./Layout/NavBar/navBar";
+import Header from './Layout/Header/Header';
+import Footer from './Layout/Footer/Footer';
+import Navbar from './Layout/NavBar/navBar';
 
 const Layout = ({ children, pageInfo }) => (
   <>
