@@ -48,93 +48,87 @@ export const useInput = initialValue => {
   };
 };
 
-export const useSteps = initialStepState => {
-  const [step, setStep] = useState(initialStepState);
+// // const stepContext = React.createContext;
+// export const useSteps = () => {
+//   // const setStepState = arr => ({
+//   //   total: 5,
+//   //   max: 5 - 1,
+//   //   currStep: 0,
+//   //   submitted: false
+//   // });
 
-  useEffect(() => {
-    console.log('useEffect::', step, step.currStep);
-  }, [step]);
+//   const [step, setStep] = useState({
+//     total: 5,
+//     max: 4,
+//     currStep: 0,
+//     submitted: false
+//   });
 
-  // const output = () => {
-  //   if (step.currStep === step.total) {
-  //     return (
-  //       <>
-  //         <p>{JSON.stringify(values, null, 2)}</p>
-  //       </>
-  //     );
-  //   }
-  // };
+//   // useEffect(() => {
+//   //   // console.log('useEffect::', step, step.currStep);
+//   // }, [step]);
 
-  // const renderPrev = () => {
-  //   return (
-  //     <>
-  //       {step.currStep !== step.total &&
-  //         (step.currStep !== 0 && step.currStep !== step.total - 1 && (
-  //           <button type="button" onClick={() => handleStep('prev', false)}>
-  //             prev
-  //           </button>
-  //         ))}
-  //     </>
-  //   );
-  // };
+//   const handleSubmit = action => {
+//     let { currStep } = step;
+//     if (action === 'prev') return setStep({ ...step, currStep: currStep - 1 });
+//     if (action === 'next') return setStep({ ...step, currStep: currStep + 1 });
+//     if (action === 'submit') return setStep({ ...step, currStep: 0 });
+//   };
 
-  // const renderNext = () => {
-  //   return (
-  //     <>
-  //       <>
-  //         {step.currStep !== step.total - 1 &&
-  //           (step.currStep !== step.total && (
-  //             <button type="button" onClick={() => handleStep('next', true)}>
-  //               next
-  //             </button>
-  //           ))}
-  //       </>
-  //     </>
-  //   );
-  // };
+//   // const renderPrev = () => {
+//   //   return (
+//   //     <>
+//   //       {step.currStep !== step.total &&
+//   //         (step.currStep !== 0 && step.currStep !== step.total - 1 && (
+//   //           <button type="button" onClick={() => handleSubmit('prev', false)}>
+//   //             prev
+//   //           </button>
+//   //         ))}
+//   //     </>
+//   //   );
+//   // };
 
-  // const renderSubmit = () => {
-  //   return (
-  //     <>
-  //       {step.currStep !== step.total &&
-  //         (step.currStep === step.total - 1 && (
-  //           <button type="button" onClick={() => handleStep('submit')}>
-  //             submit
-  //           </button>
-  //         ))}
-  //     </>
-  //   );
-  // };
+//   // const renderNext = () => {
+//   //   return (
+//   //     <>
+//   //       {step.currStep !== step.total - 1 &&
+//   //         (step.currStep !== step.total && (
+//   //           <button type="button" onClick={() => handleSubmit('next', true)}>
+//   //             next
+//   //           </button>
+//   //         ))}
+//   //     </>
+//   //   );
+//   // };
 
-  return {
-    step,
-    setStep
-    // output,
-    // renderPrev,
-    // renderNext,
-    // renderSubmit
-  };
-};
+//   // const renderSubmit = () => {
+//   //   return (
+//   //     <>
+//   //       {step.currStep !== step.total &&
+//   //         (step.currStep === step.total - 1 && (
+//   //           <button type="button" onClick={() => handleSubmit('submit')}>
+//   //             submit
+//   //           </button>
+//   //         ))}
+//   //     </>
+//   //   );
+//   // };
 
-const TestComp = ({ children }) => {
+//   return {
+//     step,
+//     handleSubmit,
+//     renderPrev,
+//     renderNext,
+//     renderSubmit
+//   };
+// };
+
+const TestComp = props => {
   const FormRef = useRef();
 
   const [values, setValues] = useState(newObject(views));
 
-  const initialStepState = {
-    total: Object.keys(values).length,
-    currStep: 0,
-    submitted: false
-  };
-
-  const [
-    step,
-    setStep
-    // output,
-    // renderPrev,
-    // renderNext,
-    // renderSubmit
-  ] = useState(initialStepState);
+  const [step, setStep] = useState();
 
   const msg = 'Thanks Broski';
 
@@ -150,6 +144,12 @@ const TestComp = ({ children }) => {
     console.log(FormRef.current);
     console.log('useEffect::', step, values, step.currStep);
   }, [step, values]);
+
+  // const submitBeforeStep = () => {
+  //   let formVal = FormRef.current[0];
+  //   updateInput(formVal.value);
+  //   return updateFormInputValue(null, formVal);
+  // };
 
   const handleStep = (action, callback) => {
     if (
@@ -274,17 +274,17 @@ const TestComp = ({ children }) => {
 
   return (
     <>
-      {renderPrev()}
+      {/* {renderPrev()} */}
       <form
         ref={FormRef}
         onSubmit={updateFormInputValue}
         onKeyUp={keyupFormInputValue}
       >
         {setupStepInput(views, step.currStep, true)}
-        {children}
+        {props.children}
       </form>
-      {renderNext()}
-      {renderSubmit()}
+      {/* {renderNext()} */}
+      {/* {renderSubmit()} */}
       {step.currStep === step.total && msg}
       <br />
       {output()}

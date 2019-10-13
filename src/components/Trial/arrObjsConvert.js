@@ -5,6 +5,8 @@ export const newObject = arrOfObjs => {
     // return the name, value fields for each object as a new object:
     [name]: value
   }));
+  const formVals = Object.assign({}, ...newArrOfObjs);
   // create a new object with the returned values
-  return Object.assign({}, ...newArrOfObjs);
+  console.log('formVals', formVals);
+  return formVals;
 };

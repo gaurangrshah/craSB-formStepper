@@ -13,7 +13,7 @@ function App() {
       <Container className="text-center">
         <Row className="counter-holder justify-content-center my-3">
           {/* <SandboxForm /> */}
-          <Trial />
+          <Trial>CHILD COMPONENT</Trial>
         </Row>
       </Container>
     </Layout>
