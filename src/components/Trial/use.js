@@ -145,11 +145,14 @@ const TestComp = props => {
     console.log('useEffect::', step, values, step.currStep);
   }, [step, values]);
 
-  // const submitBeforeStep = () => {
-  //   let formVal = FormRef.current[0];
-  //   updateInput(formVal.value);
-  //   return updateFormInputValue(null, formVal);
-  // };
+
+  const updateFormsOnStep = (action) => {
+    console.log('running update')
+      let formVal = FormRef.current[0]
+      updateInput(formVal.value)
+      updateFormInputValue(null, formVal)
+  }
+
 
   const handleStep = (action, callback) => {
     if (
@@ -165,9 +168,7 @@ const TestComp = props => {
     if (action === 'next' && step.currStep !== step.total - 1) {
       console.log('next:: Stepper:: handleStep:: from::', step);
       if (callback) {
-        let formVal = FormRef.current[0];
-        updateInput(formVal.value);
-        updateFormInputValue(null, formVal);
+        callback();
       }
       reset();
       return setStep({ ...step, currStep: step.currStep + 1 });
@@ -176,13 +177,14 @@ const TestComp = props => {
     if (action === 'submit') {
       console.log('submit:: Stepper:: handleStep:: from::', step);
       setStep({ ...step, currStep: step.currStep + 1 });
-      return callback ? () => callback() : null;
+      if (callback) {
+        callback();
+      }
+      reset();
+      return  setStep({ ...step, currStep: step.currStep + 1 });
     }
     if (action === 'submit') {
-      reset();
-      let formVal = FormRef.current[0];
-      updateInput(formVal.value);
-      updateFormInputValue(null, formVal);
+
       return setStep({ ...step, currStep: 0 });
     }
 
@@ -250,7 +252,7 @@ const TestComp = props => {
         <>
           {step.currStep !== step.total - 1 &&
             (step.currStep !== step.total && (
-              <button type="button" onClick={() => handleStep('next', true)}>
+              <button type="button" onClick={() => handleStep('next', updateFormsOnStep)}>
                 next
               </button>
             ))}
@@ -264,7 +266,7 @@ const TestComp = props => {
       <>
         {step.currStep !== step.total &&
           (step.currStep === step.total - 1 && (
-            <button type="button" onClick={() => handleStep('submit')}>
+            <button type="button" onClick={() => handleStep('submit', updateFormsOnStep)}>
               submit
             </button>
           ))}
@@ -280,8 +282,13 @@ const TestComp = props => {
         onSubmit={updateFormInputValue}
         onKeyUp={keyupFormInputValue}
       >
+<<<<<<< HEAD
         {setupStepInput(views, step.currStep, true)}
         {props.children}
+=======
+        {setupStepInput(views, step.currStep, updateFormsOnStep)}
+        {children}
+>>>>>>> 14609cc8eece688a99817008772c98decfcd7667
       </form>
       {/* {renderNext()} */}
       {/* {renderSubmit()} */}

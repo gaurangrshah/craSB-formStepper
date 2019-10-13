@@ -26,6 +26,7 @@ const RenderComp = () => {
   );
 
   console.log('vals', values);
+
   return (
     <>
       <form ref={FormRef} onSubmit={updateFormInputValue}>

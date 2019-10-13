@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Row, Container } from 'react-bootstrap';
 
 import Layout from './components/layout';
-import SandboxForm from './components/SandboxForm';
-import Trial from './components/Trial';
+// import SandboxForm from './components/SandboxForm';
+import FormComp from './components/FormComp';
 import './styles/style.scss';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Container className="text-center">
         <Row className="counter-holder justify-content-center my-3">
           {/* <SandboxForm /> */}
-          <Trial>CHILD COMPONENT</Trial>
+          <FormComp />
         </Row>
       </Container>
     </Layout>
