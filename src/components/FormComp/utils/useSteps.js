@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export const useSteps = (initialStepLength, callback) => {
   // gave access to currInputValue, to reference when handling submit, if needed.
@@ -13,16 +13,17 @@ export const useSteps = (initialStepLength, callback) => {
   let { currStep, total, max, submitted } = step;
 
   useEffect(() => {
-    console.log('useSteps:::Effect::: ', step);
+    console.log("useSteps:::Effect::: ", step);
   }, [step]);
 
   const handleSubmit = action => {
-    if (action === 'prev') return setStep({ ...step, currStep: currStep - 1 });
-    if (action === 'next') {
+    if (action === "prev") return setStep({ ...step, currStep: currStep - 1 });
+    if (action === "next") {
       setStep({ ...step, currStep: currStep + 1 });
       return callback ? callback() : null;
     }
-    if (action === 'submit') {
+
+    if (action === "submit") {
       setStep({ ...step, currStep: currStep + 1, submitted: !submitted });
       return callback ? callback() : null;
     }
@@ -32,7 +33,7 @@ export const useSteps = (initialStepLength, callback) => {
     <>
       {currStep !== total &&
         (currStep !== 0 && currStep !== max && (
-          <button type="button" onClick={() => handleSubmit('prev')}>
+          <button type="button" onClick={() => handleSubmit("prev")}>
             Prev
           </button>
         ))}
@@ -43,7 +44,7 @@ export const useSteps = (initialStepLength, callback) => {
     <>
       {currStep !== max &&
         (currStep !== total && (
-          <button type="button" onClick={() => handleSubmit('next', true)}>
+          <button type="button" onClick={() => handleSubmit("next", true)}>
             Next
           </button>
         ))}
@@ -54,7 +55,7 @@ export const useSteps = (initialStepLength, callback) => {
     <>
       {currStep !== total &&
         (currStep === max && (
-          <button type="button" onClick={() => handleSubmit('submit')}>
+          <button type="button" onClick={() => handleSubmit("submit")}>
             Submit
           </button>
         ))}

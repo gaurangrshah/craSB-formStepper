@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 // takes in current input and provides stateful functionality.
 
 export const useInput = (initialValue, callback) => {
-  const [value, setValue] = useState(initialValue || '');
+  const [value, setValue] = useState(initialValue || "");
 
   useEffect(() => {
-    console.log('useInput:::Effect::: input value: ', value);
+    console.log("useInput:::Effect::: input value: ", value);
   }, [value]);
 
   const bind = {
@@ -17,7 +17,7 @@ export const useInput = (initialValue, callback) => {
       return updateInput(value, e);
     },
     onKeyUp: e => (e.keycode === 13 ? updateInput(e.target.value, e) : null),
-    autoComplete: 'off'
+    autoComplete: "off"
   };
 
   const updateInput = (newVal, e) => {
@@ -43,7 +43,7 @@ export const useInput = (initialValue, callback) => {
   return {
     value,
     setupStepInput,
-    reset: () => setValue(''),
+    reset: () => setValue(""),
     updateInput,
     bind
   };
