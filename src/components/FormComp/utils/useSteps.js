@@ -23,7 +23,7 @@ export const useSteps = (initialStepLength, callback) => {
       return callback ? callback() : null;
     }
     if (action === 'submit') {
-      setStep({ ...step, currStep: 0 });
+      setStep({ ...step, currStep: currStep + 1, submitted: !submitted });
       return callback ? callback() : null;
     }
   };
