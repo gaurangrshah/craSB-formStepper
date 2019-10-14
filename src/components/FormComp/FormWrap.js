@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { views } from '../../db/views';
 import { newObject } from './utils/arrObjsConvert';
 import { useInput } from './utils/useInput';
@@ -6,10 +6,7 @@ import { useSteps } from './utils/useSteps';
 import { useForm } from './utils/useForm';
 
 const FormWrap = ({ children }) => {
-  const FormRef = useRef();
-
   const inputs = newObject(views);
-  // console.log('FORMWRAP:', inputs);
   let currStep = 0;
 
   const { updateValues } = useForm({ ...inputs });
@@ -33,14 +30,11 @@ const FormWrap = ({ children }) => {
   currStep = step.currStep;
 
   return (
-    <form ref={FormRef} onSubmit={handleFormUpdates}>
+    <form>
       {renderPrev()}
       {setupStepInput(views, step.currStep, true)}
       {renderNext()}
       {children}
-      <button type="button" onClick={() => handleFormUpdates()}>
-        submit
-      </button>
       {renderSubmit()}
     </form>
   );
