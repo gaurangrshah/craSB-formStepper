@@ -1,19 +1,19 @@
-import React from 'react';
-import { views } from '../../db/views';
-import { newObject } from './utils/arrObjsConvert';
-import { useInput } from './utils/useInput';
-import { useSteps } from './utils/useSteps';
-import { useForm } from './utils/useForm';
+import React from "react";
+import { views } from "../../db/views";
+import { newObject } from "./utils/arrObjsConvert";
+import { useInput } from "./utils/useInput";
+import { useSteps } from "./utils/useSteps";
+import { useForm } from "./utils/useForm";
 
-const FormWrap = ({ children }) => {
+const FormWrap = ({ msg, children }) => {
   const inputs = newObject(views);
   let currStep = 0;
 
-  const { updateValues } = useForm({ ...inputs });
+  const { values, updateValues } = useForm({ ...inputs });
 
   const handleFormUpdates = (name, value) => {
     let newVals = { name, value };
-    console.log('handleFormUpdates: ', newVals);
+    // console.log('handleFormUpdates: ', newVals);
     return updateValues(newVals);
   };
 
@@ -28,7 +28,7 @@ const FormWrap = ({ children }) => {
   );
 
   currStep = step.currStep;
-
+  const { submitted } = step;
   return (
     <form>
       {renderPrev()}
@@ -36,6 +36,8 @@ const FormWrap = ({ children }) => {
       {renderNext()}
       {children}
       {renderSubmit()}
+      {submitted && msg}
+      {submitted && JSON.stringify(values, null, 2)}
     </form>
   );
 };
