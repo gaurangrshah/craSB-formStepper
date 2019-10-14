@@ -13,7 +13,7 @@ const FormWrap = ({ children }) => {
 
   const handleFormUpdates = (name, value) => {
     let newVals = { name, value };
-    console.log('handleFormUpdates: ', newVals);
+    // console.log('handleFormUpdates: ', newVals);
     return updateValues(newVals);
   };
 

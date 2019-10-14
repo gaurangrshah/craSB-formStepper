@@ -9,7 +9,7 @@ export const useForm = valuesObject => {
 
   const updateValues = obj => {
     let { name, value } = obj;
-    console.log('updateValues', name, value);
+    // console.log('updateValues', name, value);
     setValues({ ...values, [name]: value });
   };
 

@@ -22,7 +22,10 @@ export const useSteps = (initialStepLength, callback) => {
       setStep({ ...step, currStep: currStep + 1 });
       return callback ? callback() : null;
     }
-    if (action === 'submit') return setStep({ ...step, currStep: 0 });
+    if (action === 'submit') {
+      setStep({ ...step, currStep: 0 });
+      return callback ? callback() : null;
+    }
   };
 
   const renderPrev = () => (

@@ -36,7 +36,7 @@ export const useInput = (initialValue, callback) => {
 
   const setupStepInput = (arrInputs, currIndex, render) => {
     if (render && currIndex !== arrInputs.length) {
-      console.log('setupStepInput::', { ...arrInputs[currIndex] });
+      // console.log('setupStepInput::', { ...arrInputs[currIndex] });
       return renderInput(arrInputs[currIndex]);
     }
   };
