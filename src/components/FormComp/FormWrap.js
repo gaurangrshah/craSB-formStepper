@@ -28,7 +28,7 @@ const FormWrap = ({ msg, children }) => {
   );
 
   currStep = step.currStep;
-  const { total, submitted } = step;
+  const { submitted } = step;
 
   return (
     <form>
