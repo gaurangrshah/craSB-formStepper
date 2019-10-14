@@ -1,13 +1,8 @@
-import React from 'react'
-import FormWrap from './FormWrap.js'
-import { views } from '../../db/views'
-import { newObject } from './utils/arrObjsConvert'
-
+import React from 'react';
+import FormWrap from './FormWrap.js';
 
 const FormComp = () => {
-  return (
-    <FormWrap inputs={newObject(views)} />
-  )
-}
+  return <FormWrap />;
+};
 
-export default FormComp
+export default FormComp;

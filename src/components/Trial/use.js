@@ -145,14 +145,12 @@ const TestComp = props => {
     console.log('useEffect::', step, values, step.currStep);
   }, [step, values]);
 
-
-  const updateFormsOnStep = (action) => {
-    console.log('running update')
-      let formVal = FormRef.current[0]
-      updateInput(formVal.value)
-      updateFormInputValue(null, formVal)
-  }
-
+  const updateFormsOnStep = action => {
+    console.log('running update');
+    let formVal = FormRef.current[0];
+    updateInput(formVal.value);
+    updateFormInputValue(null, formVal);
+  };
 
   const handleStep = (action, callback) => {
     if (
@@ -181,10 +179,9 @@ const TestComp = props => {
         callback();
       }
       reset();
-      return  setStep({ ...step, currStep: step.currStep + 1 });
+      return setStep({ ...step, currStep: step.currStep + 1 });
     }
     if (action === 'submit') {
-
       return setStep({ ...step, currStep: 0 });
     }
 
@@ -252,7 +249,10 @@ const TestComp = props => {
         <>
           {step.currStep !== step.total - 1 &&
             (step.currStep !== step.total && (
-              <button type="button" onClick={() => handleStep('next', updateFormsOnStep)}>
+              <button
+                type="button"
+                onClick={() => handleStep('next', updateFormsOnStep)}
+              >
                 next
               </button>
             ))}
@@ -266,7 +266,10 @@ const TestComp = props => {
       <>
         {step.currStep !== step.total &&
           (step.currStep === step.total - 1 && (
-            <button type="button" onClick={() => handleStep('submit', updateFormsOnStep)}>
+            <button
+              type="button"
+              onClick={() => handleStep('submit', updateFormsOnStep)}
+            >
               submit
             </button>
           ))}
@@ -282,13 +285,8 @@ const TestComp = props => {
         onSubmit={updateFormInputValue}
         onKeyUp={keyupFormInputValue}
       >
-<<<<<<< HEAD
-        {setupStepInput(views, step.currStep, true)}
-        {props.children}
-=======
         {setupStepInput(views, step.currStep, updateFormsOnStep)}
         {children}
->>>>>>> 14609cc8eece688a99817008772c98decfcd7667
       </form>
       {/* {renderNext()} */}
       {/* {renderSubmit()} */}
